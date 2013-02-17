@@ -1,0 +1,31 @@
+body {
+  background-color: #E8E8E8;
+}
+
+h1 {
+  margin-top: 10px;
+  font-size: 48pt;
+  text-align: center;
+}
+
+.box {
+  position: absolute;
+  background-color: blue;
+}
+
+#header-container {
+  position: relative;
+  height: 50px;
+  bottom: 5px;
+  right: 5px;
+}
+
+ul {
+  display: inline-block;
+  list-style: none;
+}
+
+.completed {
+  text-decoration: line-through;
+}
+
