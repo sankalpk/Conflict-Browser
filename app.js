@@ -12,7 +12,7 @@ var fs = require("fs");
 app.use(express.bodyParser());
 
 // The global datastore for this example
-var todoList;
+var datastore;
 
 // Asynchronously read file contents, then call callbackFn
 function readFile(filename, defaultData, callbackFn) {
@@ -39,59 +39,6 @@ function writeFile(filename, data, callbackFn) {
   });
 }
 
-// get all items
-app.get("/todo", function(request, response){
-  response.send({
-    todoList: todoList,
-    success: true
-  });
-});
-
-// create new item
-app.post("/todo", function(request, response) {
-  todoList.push({"desc": request.body.desc,
-                 "completed": false});
-  writeFile("data.txt", JSON.stringify(todoList));
-  response.send({
-    todoList: todoList,
-    success: true
-  });
-});
-
-// update one item
-app.put("/todo/:id", function(request, response){
-  // change todo at index, to the new todo
-  var id = request.params.id;
-  var todo = { "desc": request.body.desc,
-               "completed": JSON.parse(request.body.completed) };
-  todoList[id] = todo;
-  writeFile("data.txt", JSON.stringify(todoList));
-  response.send({
-    todoList: todoList,
-    success: true
-  });
-});
-
-// delete entire list
-app.delete("/todo", function(request, response){
-  todoList = [];
-  writeFile("data.txt", JSON.stringify(todoList));
-  response.send({
-    todoList: todoList,
-    success: true
-  });
-});
-
-// delete one item
-app.delete("/todo/:id", function(request, response){
-  var id = request.params.id;
-  todoList.splice(id, 1);
-  writeFile("data.txt", JSON.stringify(todoList));
-  response.send({
-    todoList: todoList,
-    success: true
-  });
-});
 
 // This is for serving files in the static directory
 app.get("/static/:staticFilename", function (request, response) {
