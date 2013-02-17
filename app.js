@@ -45,6 +45,21 @@ app.get("/static/:staticFilename", function (request, response) {
     response.sendfile("static/" + request.params.staticFilename);
 });
 
+// This is for serving files in the images directory
+app.get("/static/images/:staticFilename", function (request, response) {
+    response.sendfile("static/images/" + request.params.staticFilename);
+});
+
+// This is for serving files in js directory
+app.get("/static/js/:staticFilename", function (request, response) {
+    response.sendfile("static/js/" + request.params.staticFilename);
+});
+
+// This is for serving files in js directory
+app.get("/static/stylesheets/:staticFilename", function (request, response) {
+    response.sendfile("static/stylesheets/" + request.params.staticFilename);
+});
+
 function initServer() {
   // When we start the server, we must load the stored data
   var defaultList = "[]";
