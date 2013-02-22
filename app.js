@@ -120,7 +120,7 @@ app.delete("/libraries", function(request, response){ //deletes all libraries
 });
 
 app.delete("libraries/:name", function(request, response){ //deletes a library by name
-  delete[request.params.name];
+  delete libraries[request.params.name];
   writeFile("libraries.json", JSON.stringify(libraries));
   response.send({
     libraries: libraries,
