@@ -1,0 +1,77 @@
+body{
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+	font-weight: 300;
+	font-size: 20px;
+}
+
+#top{
+	height: 100px;
+	background-color: #EEE;
+}
+
+#flow{
+	height: 70px;
+	text-align: center;
+	font-size: 23px;
+	border-bottom: 1px solid #EEE;
+}
+
+#flow ul{
+	width: 950px;
+	list-style-type: none;
+	display: inline-block;
+}
+
+#flow ul li{
+	float: left;
+	opacity: .5;
+	display: inline-block;
+	margin: 0 50px 0 0;
+}
+
+.selected{
+	font-weight: bold;
+}
+
+#content{
+	text-align: center;
+}
+
+.instruction{
+	width: 400px;
+	display: inline-block;
+	text-align: center;
+}
+
+.button:hover{
+	opacity: 1;
+}
+
+.button{
+	color: #fff;
+	background: -webkit-gradient(linear, left top, left bottom, from(#37a3eb), to(#2181cf));
+	background: -moz-linear-gradient(top, #37a3eb, #2181cf);
+	text-shadow: rgba(0,0,0,0.2) 0 1px 0;
+	-webkit-text-shadow: rgba(0,0,0,0.2) 0 1px 0;
+	-moz-text-shadow: rgba(0,0,0,0.2) 0 1px 0;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	-ms-border-radius: 3px;
+	-o-border-radius: 3px;
+	border-radius: 3px;
+	text-align: center;
+	padding: 10px 25px;
+	font-size: 15px;
+	font-weight: 400;
+	cursor: pointer;
+	overflow: visible;
+	opacity: .8;
+}
+
+#browse{
+	background: #FF8C00;
+}
+
+#create{
+	background: #2181cf;
+}
