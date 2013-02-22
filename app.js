@@ -40,7 +40,7 @@ function writeFile(filename, data, callbackFn) {
   });
 }
 
-//DISPUTES
+// DISPUTES
 app.get("/disputes",function(request, response){
   response.send({
     disputes: disputes,
@@ -120,11 +120,13 @@ app.delete("/libraries", function(request, response){ //deletes all libraries
 });
 
 app.delete("libraries/:name", function(request, response){ //deletes a library by name
-  var name=request.params.name;
-  var id=request.params.id;
-
-
-})
+  delete[request.params.name];
+  writeFile("libraries.json", JSON.stringify(libraries));
+  response.send({
+    libraries: libraries,
+    success: true
+  });
+});
 
 
 //COORDINATES
