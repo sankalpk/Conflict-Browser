@@ -13,7 +13,7 @@ app.use(express.bodyParser());
 
 var disputes;
 var coordinates;
-var libraries; //Hash of usernames as keys and an array of dispute id as value
+var libraries; //Object with library name as keys and an array of dispute ids as value
 
 // Asynchronously read file contents, then call callbackFn
 function readFile(filename, defaultData, callbackFn) {
@@ -96,7 +96,7 @@ app.put("/libraries/:name", function(request, response){//updates user library w
   var library={ "disputes": JSON.parse(request.body.disputes), //an array of dispute ids
                 "description": request.body.description,
                 "date_modified": new Date(),
-                "time_start": -1, //TODO write a function to calculate and change
+                "time_start": -1, //TODO write a function to calculate time range and change
                 "time_end": -1
               };
   library.disputes = (library.disputes !== undefined) ? library.disputes : oldItem.disputes;
