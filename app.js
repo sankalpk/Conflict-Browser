@@ -56,7 +56,35 @@ app.get("/disputes/:id",function(request, response){
   });
 });
 
-
+//returns an array of objects of the form {"dispute_id": "1","allies":[USA,POL],"enemies":[RUS,BGR]}
+app.get("/disputes/country/:ccode", function(request, response){
+  var ccode=request.params.ccode;
+  var arr=[]; 
+  for(var key in disputes){
+    var ally=0;
+    var arr1=disputes[key][0];
+    var arr2=disputes[key][1];
+    //loop through both arrays to see if ccode is in there
+    arr1.forEach(function(country){
+      if(country===ccode) ally=1;
+    });
+    arr2.forEach(function(country){
+      if(country===ccode) ally=2;
+    });
+    //if ccode is in there, add obj to array
+    if (ally!=0){
+      var obj = new Object();
+      obj.dispute_id=key;
+      if(ally===1) {obj.allies=arr1; obj.enemies=arr2;}
+      else if(ally===2) {obj.allies=arr2; obj.enemies=arr1;}
+      arr.push(obj);
+    }
+  }
+  response.send({
+    disputes: arr,
+    success: false
+  });
+}); 
 
 //LIBRARIES
 app.get("/libraries",function(request, response){ //get all libraries

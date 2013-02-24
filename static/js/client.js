@@ -32,3 +32,12 @@ function getLibraries(){
     }
   });
 }
+
+function getDisputesByCountry(ccode){
+  $.ajax({
+    type: "get",
+    url: "/disputes/country/"+ccode,
+    success: function(data){
+     }
+  });
+}
