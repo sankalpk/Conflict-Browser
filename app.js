@@ -128,6 +128,7 @@ app.put("/libraries/:name", function(request, response){//updates user library w
                 "time_end": -1
               };
   library.disputes = (library.disputes !== undefined) ? library.disputes : oldItem.disputes;
+  library.date_added=oldItem.date_added;
   library.description = (library.description !== undefined) ? library.description : oldItem.description;
   libraries[name]= library;
   writeFile("libraries.json", JSON.stringify(libraries));
