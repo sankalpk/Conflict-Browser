@@ -109,7 +109,8 @@ app.post("/libraries", function(request, response) { //create a new library asso
                   "date_modified": new Date(),
                   "date_added": new Date(),
                   "time_start": -1,
-                  "time_end": -1
+                  "time_end": -1,
+                  "kudos":0
                   };
   writeFile("libraries.json", JSON.stringify(libraries));
   response.send({
@@ -124,11 +125,12 @@ app.put("/libraries/:name", function(request, response){//updates user library w
   var library={ "disputes": JSON.parse(request.body.disputes), //an array of dispute ids
                 "description": request.body.description,
                 "date_modified": new Date(),
+                "date_added": oldItem.date_added,
                 "time_start": -1, //TODO write a function to calculate time range and change
-                "time_end": -1
+                "time_end": -1,
+                "kudos": oldItem.kudos
               };
   library.disputes = (library.disputes !== undefined) ? library.disputes : oldItem.disputes;
-  library.date_added=oldItem.date_added;
   library.description = (library.description !== undefined) ? library.description : oldItem.description;
   libraries[name]= library;
   writeFile("libraries.json", JSON.stringify(libraries));
@@ -136,6 +138,17 @@ app.put("/libraries/:name", function(request, response){//updates user library w
   response.send({
     library: library,
     success: true
+  });
+});
+
+app.put("libraries/:name/kudos", function(request, response){ //give kudos to a library
+  var name=request.params.name;
+  libraries[name].kudos+=1;
+  writeFile("libraries.json", JSON.stringify(libraries));
+
+  response.send({
+    library: libraries[name],
+    success:true
   });
 });
 
@@ -203,7 +216,7 @@ app.get("/static/data/:staticFilename", function (request, response) {
 });
 
 
-function initServer() { //Todo: Double check piazza to see if this is how we should read multiple files
+function initServer() { //TODO: Double check piazza to see if this is how we should read multiple files
   // When we start the server, we must load the stored data
   var defaultHash = "{}";
   readFile("static/data/disputes.json", defaultHash, function(err, data) {
