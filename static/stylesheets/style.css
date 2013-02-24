@@ -195,11 +195,13 @@ label{
   position:relative;
   /*border:2px solid black;*/
   margin:10px 20px;
-  padding:15px;
+  padding:20px;
+  background-color:#EEE;
+  font-size:16px;
 }
 
 .name{
-  font-size:20px;
+  font-size:25px;
 }
 
 .date_range{
@@ -212,4 +214,57 @@ label{
 .extra_info{
   display:none;
   padding-top:15px;
+  height:200px;
+  text-align:center;
+
+}
+
+.extra_info h1{
+  opacity:0.4;  
+  font-size:15px;
+}
+
+.description{
+  position:absolute;
+  text-align:left;
+  width:33%;
+  height:200px; 
+  overflow-y:auto;
+}
+
+.date_added,.date_modified{
+  font-size: 25px;
+  padding-bottom:15px;
+} 
+
+.dates{
+  position:absolute;
+  width:33%;
+  left:33%;
+}
+
+
+.buttons{
+  position:absolute;
+  width:33%;
+  left:66%;
+}
+
+
+.button { /* base styles for all buttons */
+    display: inline-block;
+    margin: 5px;
+    font-weight: bold;
+    font-size: 12px;
+    text-align: center;
+    padding: 8px 12px;
+    border-radius: 3px; /* css3 */
+    box-shadow: 1px 1px 8px #666; /* css3 */
+    background-color: #f6f6f6; 
+    cursor: pointer; /* makes the cursor a "hand" instead of a "pointer" */
+}
+
+.view_lib, .download_json{
+  padding:20px;
+  background-color:#ddd;
 }

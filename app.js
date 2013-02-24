@@ -74,7 +74,7 @@ app.get("/disputes/country/:ccode", function(request, response){
     //if ccode is in there, add obj to array
     if (ally!=0){
       var obj = new Object();
-      obj.dispute_id=key;
+      obj.dispute=disputes[key];
       if(ally===1) {obj.allies=arr1; obj.enemies=arr2;}
       else if(ally===2) {obj.allies=arr2; obj.enemies=arr1;}
       arr.push(obj);
@@ -82,7 +82,7 @@ app.get("/disputes/country/:ccode", function(request, response){
   }
   response.send({
     disputes: arr,
-    success: false
+    success: true
   });
 }); 
 
