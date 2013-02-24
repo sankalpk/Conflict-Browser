@@ -175,3 +175,31 @@ label{
 	padding: 10px;
 	border: 1px solid gray;
 }
+
+/* Libraries */
+.lib{
+  margin:10px;
+  text-align:left;
+  display:block;
+  position:relative;
+  /*border:2px solid black;*/
+  margin:10px 20px;
+  padding:15px;
+}
+
+.name{
+  font-size:20px;
+}
+
+.date_range{
+  position:absolute;
+  right:0px;
+  top:0px;
+  padding:15px;
+}
+
+.extra_info{
+  display:none;
+  padding-top:15px;
+}
+
