@@ -90,7 +90,7 @@ app.post("/libraries", function(request, response) { //create a new library asso
   });
 });
 
-app.put("/libraries/:name", function(request, response){//updates user library with new array of disputes
+app.put("/libraries/:name", function(request, response){//updates user library with new array of disputes or description
   var name=request.params.name;
   var oldItem=libraries[name];
   var library={ "disputes": JSON.parse(request.body.disputes), //an array of dispute ids
@@ -174,7 +174,7 @@ app.get("/static/data/:staticFilename", function (request, response) {
 });
 
 
-function initServer() {
+function initServer() { //Todo: Double check piazza to see if this is how we should read multiple files
   // When we start the server, we must load the stored data
   var defaultHash = "{}";
   readFile("static/data/disputes.json", defaultHash, function(err, data) {
