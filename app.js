@@ -159,14 +159,15 @@ app.delete("libraries/:name", function(request, response){ //deletes a library b
 
 
 //COORDINATES
-app.get("/coordinates",function(){
+app.get("/coordinates",function(request, response){
   response.send({
     coordinates: coordinates,
     success: true
   });
 });
 
-app.get("/coordinates/:ccode", function(){
+
+app.get("/coordinates/:ccode", function(request, response){
   var ccode=request.params.ccode; //by ISO3 country code, i.e. United Staes is USA
   response.send({
     coordinate: coordinates[ccode],
