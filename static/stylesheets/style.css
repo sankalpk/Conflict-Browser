@@ -5,28 +5,23 @@ body{
 }
 
 #top{
-	height: 100px;
+	height: 50px;
 	background-color: #EEE;
+	text-align: center;
+}
+
+#top_blue{
+	height: 50px;
+	background-color: #EEF;
+	text-align: center;
 }
 
 #flow{
-	height: 70px;
+	height: 50px;
 	text-align: center;
 	font-size: 23px;
 	border-bottom: 1px solid #EEE;
-}
-
-#flow ul{
-	width: 950px;
-	list-style-type: none;
-	display: inline-block;
-}
-
-#flow ul li{
-	float: left;
-	opacity: .5;
-	display: inline-block;
-	margin: 0 50px 0 0;
+	margin: 10px;
 }
 
 .selected{
@@ -38,7 +33,7 @@ body{
 }
 
 .instruction{
-	width: 400px;
+	width: 500px;
 	display: inline-block;
 	text-align: center;
 }
@@ -74,4 +69,106 @@ body{
 
 #create{
 	background: #2181cf;
+}
+
+label{
+	display: block;
+	clear: both;
+	margin-top: 20px;
+}
+
+#form-wrapper{
+	display: block;
+	width: 400px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: left;
+}
+
+#formsubmit{
+	display: block;
+	clear: both;
+	margin-top: 30px;
+	padding: 5px 20px;
+}
+
+.create-1{
+	display: none;
+}
+
+#conflicts{
+	height: 400px;
+	width: 200px;
+	background-color: #FEE;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+}
+
+#detail{
+	height: 400px;
+	width: 400px;
+	background-color: #EFE;
+	position: absolute;
+	top: 0px;
+	left: 200px;
+}
+
+#map{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#timeline{
+	width: 600px;
+	height: 100px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#vis{
+	width: 650px;
+	height: 600px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.title{
+	height: 20px;
+	padding: 10px;
+	border: 2px solid gray;
+}
+
+#conflict-wrapper{
+	display: block;
+	width: 600px;
+	height: 400px;
+	margin-left: auto;
+	margin-right: auto;
+	vertical-align: center;
+	position: relative;
+}
+
+#conflict-list{
+	height: 300px;
+	width: 100%;
+	overflow-y: scroll;
+	font-size: 12px;
+	text-align: left;
+	margin: 0px;
+}
+
+#conflict-list ul{
+	list-style-type: none;
+	margin: 0px;
+	padding-left: 0px;
+}
+
+#conflict-list li{
+	margin: 2px;
+	padding: 10px;
+	border: 1px solid gray;
 }
