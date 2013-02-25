@@ -56,6 +56,7 @@ app.get("/disputes/:id",function(request, response){
   });
 });
 
+/*
 //returns an array of objects of the form {"dispute_id": "1","allies":[USA,POL],"enemies":[RUS,BGR]}
 app.get("/disputes/country/:ccode", function(request, response){
   var ccode=request.params.ccode;
@@ -74,7 +75,7 @@ app.get("/disputes/country/:ccode", function(request, response){
     //if ccode is in there, add obj to array
     if (ally!=0){
       var obj = new Object();
-      obj.dispute_id=key;
+      obj.dispute=disputes[key];
       if(ally===1) {obj.allies=arr1; obj.enemies=arr2;}
       else if(ally===2) {obj.allies=arr2; obj.enemies=arr1;}
       arr.push(obj);
@@ -82,7 +83,40 @@ app.get("/disputes/country/:ccode", function(request, response){
   }
   response.send({
     disputes: arr,
-    success: false
+    success: true
+  });
+}); */
+
+app.get("/disputes/country/:ccode", function(request, response){
+  var ccode=request.params.ccode;
+  var returnObj=new Object();
+  var arr=[]; 
+  for(var key in disputes){
+    var ally=0; //if 0, country not involved, if 1=>arr1 is allies, if 2=>arr2 is allies
+    var arr1=disputes[key][0];
+    var arr2=disputes[key][1];
+    //loop through both arrays to see if ccode is in there
+    arr1.forEach(function(country){
+      if(country===ccode) ally=1;
+    });
+    arr2.forEach(function(country){
+      if(country===ccode) ally=2;
+    });
+    //if ccode is in there, add obj
+    if (ally!=0){
+      console.log("Here");
+      var obj = new Object();
+      obj.dispute=disputes[key];
+      if(ally===1) {obj.allies=arr1; obj.enemies=arr2;}
+      else if(ally===2) {obj.allies=arr2; obj.enemies=arr1;}
+      //if year is not in return obj
+      if(returnObj[disputes[key][4]]===undefined) {returnObj[disputes[key][4]]=[];}
+      returnObj[disputes[key][4]].push(obj);
+    }
+  }
+  response.send({
+    disputes: returnObj,
+    success: true
   });
 }); 
 
