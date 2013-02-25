@@ -142,8 +142,8 @@ app.post("/libraries", function(request, response) { //create a new library asso
                   "description": request.body.description,
                   "date_modified": new Date(),
                   "date_added": new Date(),
-                  "time_start": -1,
-                  "time_end": -1,
+                  "year_start": -1,
+                  "year_end": -1,
                   "kudos":0
                   };
   writeFile("libraries.json", JSON.stringify(libraries));
