@@ -201,14 +201,14 @@ label{
 }
 
 .name{
-  font-size:25px;
+  font-size:20px;
 }
 
 .date_range{
   position:absolute;
   right:0px;
   top:0px;
-  padding:15px;
+  padding:20px;
 }
 
 .extra_info{
