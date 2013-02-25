@@ -337,11 +337,12 @@ h6{
   width:33%;
   height:200px; 
   overflow-y:auto;
+  z-index:3;
 }
 
 
 
-.date_added,.date_modified{
+.date_started,.date_ended{
   font-size: 25px;
   padding-bottom:15px;
 } 
@@ -350,6 +351,7 @@ h6{
   position:absolute;
   width:33%;
   left:33%;
+  z-index:2;
 }
 
 
@@ -357,12 +359,16 @@ h6{
   position:absolute;
   width:33%;
   left:66%;
+  z-index:1;
 }
 
-
-
-
-.view_lib, .download_json{
-  padding:20px;
-  background-color:#ddd;
+.view_lib,.download_json{
+  padding:15px;
+  display:block;
+  font-size:12px;
+  text-align:center;
+  margin-left:auto;
+  margin-right:auto;
+  margin-top:15px;
+  width:100px;
 }
