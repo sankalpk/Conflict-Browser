@@ -162,7 +162,7 @@ label{
 #conflict-list{
 	height: 350px;
 	width: 100%;
-	overflow-y: scroll;
+	overflow-y: auto;
 	font-size: 12px;
 	text-align: left;
 	margin: 0px;
@@ -236,7 +236,7 @@ label{
 #conflict-details{
 	width: 100%;
 	height: 350px;
-	overflow-y: scroll;
+	overflow-y: auto;
 	font-size: 13px;
 }
 
@@ -268,7 +268,7 @@ label{
 	margin-top: 15px;
 	padding-right: 15px;
 	display: block;
-	overflow-y: scroll;
+	overflow-y: auto;
 }
 
 #conflict-vs #enemies{
@@ -281,7 +281,7 @@ label{
 	margin-top: 15px;
 	padding-left: 15px;
 	display: block;
-	overflow-y: scroll;
+	overflow-y: auto;
 	
 }
 
