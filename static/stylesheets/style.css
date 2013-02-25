@@ -51,6 +51,7 @@ body{
     border-radius: 3px; /* css3 */
     box-shadow: 1px 1px 8px #666; /* css3 */
     background-color: #f6f6f6; 
+
     cursor: pointer; /* makes the cursor a "hand" instead of a "pointer" */
 }
 
@@ -303,6 +304,8 @@ h6{
 }
 
 /* Libraries */
+
+
 .lib{
   margin:10px;
   text-align:left;
@@ -319,11 +322,12 @@ h6{
   font-size:20px;
 }
 
-.date_range{
+.date_modified{
   position:absolute;
   right:0px;
   top:0px;
   padding:20px;
+  opacity: .6;
 }
 
 .extra_info{
@@ -345,12 +349,13 @@ h6{
   width:33%;
   height:200px; 
   overflow-y:auto;
+  z-index:3;
 }
 
 
 
-.date_added,.date_modified{
-  font-size: 25px;
+.date_started,.date_ended{
+  font-size: 50px;
   padding-bottom:15px;
 } 
 
@@ -358,6 +363,7 @@ h6{
   position:absolute;
   width:33%;
   left:33%;
+  z-index:2;
 }
 
 
@@ -365,12 +371,21 @@ h6{
   position:absolute;
   width:33%;
   left:66%;
+  z-index:1;
 }
 
+.buttons a:link,a:visited{
+  text-decoration: none;
+  color:black;
+}
 
-
-
-.view_lib, .download_json{
-  padding:20px;
-  background-color:#ddd;
+.view_lib,.download_json{
+  padding:15px;
+  display:block;
+  font-size:12px;
+  text-align:center;
+  margin-left:auto;
+  margin-right:auto;
+  margin-top:15px;
+  width:100px;
 }
