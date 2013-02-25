@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Unit Project</title>
+    <link rel="stylesheet" href="stylesheets/style.css" type="text/css"></link>
+    <script src="js/jquery-1.9.0.js" type="text/javascript"></script>
+    <script src="js/create.js" type="text/javascript"></script>
+    <script src="js/client.js" type="text/javascript"></script>
+  </head>
+
+  <body>
+    <div id ="top_blue">
+      Viewing a library
+    </div>
+    <div id = "flow">
+       Name of Library Goes Here     
+    </div>
+    <div id="content">
+      
+      <div class = "create-1">
+        <div id="form-wrapper">
+          <form>
+            <label for="libname">Name</label>
+            <input name="libname" type="text" size="50"></input>
+    
+            <label for="libdesc">Description</label>
+            <textarea name="libdesc" type="text" rows="5" cols="50"></textarea>
+            
+            <input class="button" id="formsubmit" type="submit" value="Next"></input>
+          </form>
+        </div>
+      </div>
+      
+      <div class ="create-2">
+      
+        <div id = "vis">
+        
+          <canvas id="timeline" width="600px" height="100px">
+          </canvas>
+          
+          <div id = "conflict-wrapper">
+            <div id="conflicts">
+              <div class= "title">Conflicts</div>
+              <div id = "conflict-list">
+                <ul>
+                  
+                </ul>
+              </div>
+            </div>
+            
+            <div id="detail">
+              <div class= "title">Details</div>
+              <div id="conflict-details">
+                <div id="conflict-name"></div>
+                <div id="conflict-date"></div>
+                <div id="conflict-vs">
+                  <div id="allies">
+                    <ul>
+                    </ul>
+                  </div>
+                  <div style="position:absolute; top:50%; left:175px; display:block; height:50px; width:50px; text-align: center;">
+                  vs.
+                  
+                  </div>
+                  <div id="enemies">
+                    <ul>
+                      <li></li>
+                    </ul>
+                  </div>
+                  
+                </div>
+                
+                <div id="conflict-outcome">
+                </div>
+                
+                <div id="conflict-fatality">
+                </div>
+                
+                <div id="conflict-hostility">
+                </div>
+              </div>
+              <div id = "conflict-footer">
+                <button class="button">Search Google</button>
+                                                <button class="button" disabled="true">Add to Library</button>
+
+              </div>
+            </div>
+            
+          </div>
+          <canvas id="map" width="600px" height="391px">
+          </canvas>
+          
+        </div>
+        
+      </div>
+      
+    </div>
+  </body>
+</html>

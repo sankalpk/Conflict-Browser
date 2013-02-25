@@ -135,6 +135,21 @@ app.get("/libraries/:name",function(request,response){ //get one library by name
   });
 });
 
+app.get("/libraries/disputein/:name/:ccode",function(request, response){ //returns whether the ccode is in the library
+  var name=request.params.name;
+  var ccode=parseInt(request.params.ccode);
+  var inArray=false;
+  libraries[name].disputes.forEach(function(x){ //uses closures
+    if(x===ccode) inArray=true;
+  });
+  console.log(inArray);
+
+  response.send({
+    inArray: inArray,
+    success:true
+  });
+});
+
 app.post("/libraries", function(request, response) { //create a new library associated with "name"
   libraries[request.body.name]={
                   "disputes": [],
@@ -202,7 +217,6 @@ app.delete("libraries/:name", function(request, response){ //deletes a library b
     success: true
   });
 });
-
 
 //COORDINATES
 app.get("/coordinates",function(request, response){
