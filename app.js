@@ -104,7 +104,6 @@ app.get("/disputes/country/:ccode", function(request, response){
     });
     //if ccode is in there, add obj
     if (ally!=0){
-      console.log("Here");
       var obj = new Object();
       obj.dispute=disputes[key];
       if(ally===1) {obj.allies=arr1; obj.enemies=arr2;}
