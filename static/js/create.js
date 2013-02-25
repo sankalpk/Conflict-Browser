@@ -10,8 +10,8 @@ var x_end_max = 585;
 var x_start_min = 10;
 
 /* The reference country */
-var country;
-var conflicts;
+var ccode;
+var disputes;
 
 /* For timeline interactions */
 var drag_start = false;
@@ -38,14 +38,62 @@ window.onload = function(){
   		map_context.drawImage(map, 0, 0);
   	};
   	map.src = "images/world.75.png";
+  	
+  	/* Populate the search */
+	$.ajax({
+		type: "get",
+		url: "/coordinates",
+		success: function(data) {
+			var coordinates = data.coordinates;
+			var sel = $("#country-input");
+			sel.change(updateWithCountry());
+			for(var country_code in coordinates){
+				var opt = $("<option>");
+				opt.attr("value", country_code);
+				opt.html(coordinates[country_code][0]);
+				sel.append(opt);
+			}
+		}
+	});	
+
+}
+
+
+/* Given a new country, updates the enire page */
+function updateWithCountry(country_code){
+	return function(){
+	
+		/* Get the selected country code */
+		ccode = $("#country-input option:selected")[0].value;
+		
+		/* Make sure we were able to get the country code */
+		if(ccode === undefined || ccode.length !== 3){
+			/* TODO: Update timeline and map to be blank */
+			return;
+		}
+				
+		/* Get the conflicts for the country */
+		$.ajax({
+			type: "get",
+			url: "/disputes/country/"+ccode,
+			success: function(data){
+				disputes = data.disputes;
+				
+				/* Update the timeline */
+				
+				/* Update the conflict DOM */
+				
+				/* Update the map */
+				
+			}
+		});
+	};
 }
 
 
 /* Draws the unpopulated timeline on the timeline canvas */
 function drawTimeline(slider_start, slider_end){
 
-	//var slider_start = 10;
-	//var slider_end = 500;
 	
 	/* Clear the context */
 	timeline_context.clearRect(0,0, timeline_canvas.width, timeline_canvas.height);
@@ -71,10 +119,13 @@ function drawTimeline(slider_start, slider_end){
 	timeline_context.fillRect(10, 70, 580, 5);
 	timeline_context.strokeRect(10, 70, 580, 5);
 	
-	
-	
-	/* TODO: Timeline data */
-	
+	/* TODO: Timeline data 
+	if(disputes !=== undefined){
+		for(var i=0; i<disputes.length; i++){
+			
+		}
+	}
+	*/
 	
 	/* Timeline sliders */
 	timeline_context.fillStyle = "#866";

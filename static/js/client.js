@@ -1,6 +1,6 @@
-var disputes;
-var coordinates;
-var libraries;
+var disputes = undefined;
+var coordinates = undefined;
+var libraries = undefined;
 
 //Ajax methods
 function getDisputes(){
@@ -8,7 +8,7 @@ function getDisputes(){
     type: "get",
     url: "/disputes",
     success: function(data) {
-      disputes = data.disputes;
+      //disputes = data.disputes;
     }
   });
 }
@@ -19,6 +19,7 @@ function getCoordinates(){
     url: "/coordinates",
     success: function(data) {
       coordinates = data.coordinates;
+      
     }
   });
 }
@@ -38,6 +39,7 @@ function getDisputesByCountry(ccode){
     type: "get",
     url: "/disputes/country/"+ccode,
     success: function(data){
+    	disputes = data.disputes;
      }
   });
 }

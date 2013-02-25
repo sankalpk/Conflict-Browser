@@ -5,7 +5,7 @@
 		<link rel="stylesheet" href="stylesheets/style.css" type="text/css"></link>
 		<script src="js/jquery-1.9.0.js" type="text/javascript"></script>
 		<script src="js/create.js" type="text/javascript"></script>
-
+		<script src="js/client.js" type="text/javascript"></script>
 	</head>
 
 	<body>
@@ -18,7 +18,9 @@
 			</div>
 			<div class ="create-2">
 				<div id="country-form">
-					<h3><form style="display:inline;"><input name ="countryname" type="text" style="height:20px; vertical-align:middle; width:300px"></input></form> 's disputes</h3>
+					<h3><form style="display:inline;"><select id="country-input" name="countryname" type="text" style="height:20px; vertical-align:middle; width:300px">
+						<option value=""></option>
+					</select></form> 's disputes</h3>
 				</div>
 			</div>			
 		</div>
@@ -67,7 +69,51 @@
 						
 						<div id="detail">
 							<div class= "title">Details</div>
+							<div id="conflict-details">
+								<div id="conflict-name">French & Indian War</div>
+								<div id="conflict-date">2/25/1850 - 3/30/1990</div>
+								<div id="conflict-vs">
+									<div id="allies">
+										<ul>
+											<li>United States of America</li>
+											<li>French</li>
+											<li>England</li>
+											<li>England</li>
+											<li>England</li>
+											<li>England</li>
+											<li>England</li>
+											<li>England</li>
+											<li>England</li>
+											<li>England</li>
+										</ul>
+									</div>
+									<div style="position:absolute; top:50%; left:175px; display:block; height:50px; width:50px; text-align: center;">
+									vs.
+									
+									</div>
+									<div id="enemies">
+										<ul>
+											<li>Russia</li>
+										</ul>
+									</div>
+									
+								</div>
+								
+								<div id="conflict-outcome">
+									<h6>Outcome:</h6> Allied Victory
+								</div>
+								
+								<div id="conflict-fatality">
+									<h6>Fatality Count:</h6> 114 deaths
+								</div>
+								
+								<div id="conflict-hostility">
+									<h6>Hostility Level:</h6> No militarized action
+								</div>
+								
+							</div>
 						</div>
+						
 					</div>
 					<canvas id="map" width="600px" height="391px">
 					</canvas>

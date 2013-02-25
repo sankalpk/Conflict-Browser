@@ -144,6 +144,7 @@ label{
 
 .title{
 	height: 20px;
+	font-size: 20px;
 	padding: 10px;
 	border: 2px solid gray;
 }
@@ -210,6 +211,101 @@ label{
 }
 
 .extra_info{
-  display:none;
+  display: none;
   padding-top:15px;
+}
+
+#conflict-details{
+	width: 100%;
+	height: 350px;
+	overflow-y: scroll;
+	font-size: 13px;
+}
+
+#conflict-name{
+	font-size: 15px;
+	font-weight: 600;
+	margin: 10px;
+}
+
+#conflict-date{
+	font-size: 13px;
+	font-size: italic;
+}
+
+#conflict-vs{
+	width: 100%;
+	height: 50px;
+	vertical-align: middle;
+	position: relative;
+}
+
+#conflict-vs #allies{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	height: 100%;
+	width: 170px;
+	text-align: right;
+	margin-top: 15px;
+	padding-right: 15px;
+	display: block;
+	overflow-y: scroll;
+}
+
+#conflict-vs #enemies{
+	position: absolute;
+	top: 0px;
+	left: 205px;
+	height: 100%;
+	width: 170px;
+	text-align: left;
+	margin-top: 15px;
+	padding-left: 15px;
+	display: block;
+	overflow-y: scroll;
+	
+}
+
+#conflict-outcome{
+	margin-top: 50px;
+	font-size: 15px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 300px;
+	height: 20px;
+	text-align: left;
+	font-size: 13px;
+}
+
+#conflict-fatality{
+	margin-top: 10px;
+	font-size: 15px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 300px;
+	height: 20px;
+	text-align: left;
+	font-size: 13px;
+}
+
+#conflict-hostility{
+	margin-top: 10px;
+	font-size: 15px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 300px;
+	height: 20px;
+	text-align: left;
+	font-size: 13px;
+}
+
+h6{
+	color: gray;
+	font-weight: 600;
+	display: inline-block;
+	width: 150px;
 }
