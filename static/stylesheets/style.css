@@ -199,11 +199,18 @@ label{
   border: 1px solid black;
   background-color: white;
 }
+
 #conflict-details{
   width: 100%;
-  height: 350px;
+  height: 300px;
   overflow-y: auto;
   font-size: 13px;
+}
+
+#conflict-footer{
+  width: 100%;
+  height: 50px;
+  background-color: rgba(250, 250, 250, .5);
 }
 
 #conflict-name{
@@ -222,6 +229,7 @@ label{
   height: 50px;
   vertical-align: middle;
   position: relative;
+  display: none;
 }
 
 #conflict-vs #allies{

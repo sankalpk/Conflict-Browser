@@ -150,11 +150,7 @@ function updateConflicts(){
 }
 
 function updateDetails(year, i){
-	console.log(year+" "+i)
 	var d = disputes[year][i];
-	
-	console.log(d);
-	console.log(d.dispute);
 	
 	if(d.dispute[16] !== undefined)
 		$("#conflict-name").html(d.dispute[16]);
@@ -174,10 +170,11 @@ function updateDetails(year, i){
 	enemies.html("");
 	for(var i=0; i<d["enemies"].length; i++){
 		var li = $("<li>");
-		console.log(d["enemies"][i]);
 		li.html(d["enemies"][i]);
 		enemies.append(li);
 	}
+	
+	$("#conflict-vs").css("display", "block");
 	
 	var outcome_code = parseInt(d.dispute[8]);
 	var outcome;	
@@ -248,12 +245,40 @@ function updateDetails(year, i){
 		case 5: hostility = "War"; break;
 	}
 	$("#conflict-hostility").html("<h6>Hostility: </h6>" + hostility);
+
+	/* Search google button appears only if the conflict is named */
+	
+	/* Add to library button is only enabled if the conflict isn't in the library */
 		
 }
 
 function updateMap(){
 	/* Redraw map with conflicts in time range */
+	var start_yr = timelinePixelToYear(date_start);
+	var end_yr = timelinePixelToYear(date_end);
+
 	
+	for(var year in disputes){
+		if(parseInt(year) < start_yr || parseInt(year) > end_yr)
+			continue;
+		for(var i = 0; i<disputes[year].length; i++){
+			/* Draw allies */
+			var allies = disputes[year][i].allies;
+			for(var j=0; j<allies.length; j++){
+			//	if (allies[j] !== ccode)
+				console.log(allies[i]);
+			}
+						
+			/* Draw enemies*/
+			var enemies = disputes[year][i].enemies;
+			for(var j=0; j<enemies.length; j++){
+				console.log(enemies[j]);
+			}
+
+		}
+	}
+		
+		
 	/* Add points for current conflict */
 }
 
@@ -343,18 +368,15 @@ function setTimelineInteractions(){
 		var y = event.pageY - timeline_canvas.offsetTop;
 		if(y>60 && y<80){
 			if(x<date_start+10 && x>date_start-10){
-				console.log("moving start");
 				drag_start = true;
 			}
 			else if(x<date_end+10 && x>date_end-10){
-				console.log("moving end");
 				drag_end = true;
 			}
 		}
 
 	}, false);
 
-	/* */
 	timeline_canvas.addEventListener("mousemove", function(ev){
 		var x = event.pageX - timeline_canvas.offsetLeft;
 
