@@ -51,6 +51,7 @@ body{
     border-radius: 3px; /* css3 */
     box-shadow: 1px 1px 8px #666; /* css3 */
     background-color: #f6f6f6; 
+
     cursor: pointer; /* makes the cursor a "hand" instead of a "pointer" */
 }
 
@@ -295,6 +296,8 @@ h6{
 }
 
 /* Libraries */
+
+
 .lib{
   margin:10px;
   text-align:left;
@@ -361,6 +364,11 @@ h6{
   width:33%;
   left:66%;
   z-index:1;
+}
+
+.buttons a:link,a:visited{
+  text-decoration: none;
+  color:black;
 }
 
 .view_lib,.download_json{
