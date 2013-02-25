@@ -110,12 +110,41 @@ function updateWithCountry(country_code){
 				drawTimeline(date_start, date_end);
 				
 				/* Update the conflict DOM */
+				updateConflicts();
 				
 				/* Update the map */
 				
 			}
 		});
 	};
+}
+
+
+/* Updates conflict information with the given start and end date */
+function updateConflicts(){
+	/* Remove children */
+	var ul = $("#conflict-list ul");
+	ul.html("");
+	
+	var start_yr = timelinePixelToYear(date_start);
+	var end_yr = timelinePixelToYear(date_end);
+
+	
+	/* Create and add new children */
+	for(var year in disputes){
+		if(parseInt(year) < start_yr || parseInt(year) > end_yr)
+			continue;
+		for(var i = 0; i<disputes[year].length; i++){
+			var li = $("<li>");
+			if(disputes[year][i].dispute[16] !== undefined){
+				li.html(disputes[year][i].dispute[16]);
+			}
+			else{
+				li.html("Unnamed conflict");
+			}
+			ul.append(li);
+		}
+	}
 }
 
 
@@ -225,7 +254,8 @@ function setTimelineInteractions(){
 			date_start = x;
 			
 			/* Redraw conflicts list */
-			
+			updateConflicts();
+						
 			/* Redraw the map */
 			
 		}
@@ -235,6 +265,7 @@ function setTimelineInteractions(){
 			date_end = x;
 			
 			/* Redraw conflicts list */
+			updateConflicts();
 			
 			/* Redraw the map */
 		}
@@ -244,6 +275,8 @@ function setTimelineInteractions(){
 	timeline_canvas.addEventListener("mouseup", function(ev){
 		drag_start = false;
 		drag_end = false;
+		updateConflicts();
+
 	}, false);
 
 }
