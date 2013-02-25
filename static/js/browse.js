@@ -7,7 +7,7 @@ $(document).ready(function(){
 function hideExtraInfo(){
   var items = $(".lib");
   items.each(function(i,lib){
-    $(lib).click(function(){
+    $(lib).find(".name").click(function(){
       console.log(lib);
       if ($(lib).find(".extra_info").css("display")==="none"){
         $(lib).find(".extra_info").css("display","block");
