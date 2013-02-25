@@ -136,15 +136,125 @@ function updateConflicts(){
 			continue;
 		for(var i = 0; i<disputes[year].length; i++){
 			var li = $("<li>");
-			if(disputes[year][i].dispute[16] !== undefined){
+			
+			li.attr("onclick", "updateDetails("+year+","+i+")");
+			
+			if(disputes[year][i].dispute[16] !== undefined)
 				li.html(disputes[year][i].dispute[16]);
-			}
-			else{
-				li.html("Unnamed conflict");
-			}
+			else
+				li.html("Unnamed Conflict of " + year);
+			
 			ul.append(li);
 		}
 	}
+}
+
+function updateDetails(year, i){
+	console.log(year+" "+i)
+	var d = disputes[year][i];
+	
+	console.log(d);
+	console.log(d.dispute);
+	
+	if(d.dispute[16] !== undefined)
+		$("#conflict-name").html(d.dispute[16]);
+	else
+		$("#conflict-name").html("Unnamed Conflict");	
+	$("#conflict-date").html(d.dispute[4] + " - " + d.dispute[7]);
+	
+	var allies = $("#conflict-vs #allies ul");
+	allies.html("");
+	for(var i=0; i<d["allies"].length; i++){
+		var li = $("<li>");
+		li.html(d["allies"][i]);
+		allies.append(li);
+	}
+	
+	var enemies = $("#conflict-vs #enemies ul");
+	enemies.html("");
+	for(var i=0; i<d["enemies"].length; i++){
+		var li = $("<li>");
+		console.log(d["enemies"][i]);
+		li.html(d["enemies"][i]);
+		enemies.append(li);
+	}
+	
+	var outcome_code = parseInt(d.dispute[8]);
+	var outcome;	
+	switch(outcome_code){
+		/* There was a loss or a yield */
+		case 1:
+		case 2:
+		case 3:
+		case 4: 		
+			if(outcome_code%2 == 1){
+				if($.inArray(ccode, d.dispute[0]))
+					outcome = "Enemy";
+				else
+					outcome = "Allied"
+					
+				if(outcome_code > 2)
+					outcome += " Yield";
+				else
+					outcome += " Victory";
+			}
+			else{
+				if($.inArray(ccode, d.dispute[0]))
+					outcome = "Allied";
+				else
+					outcome = "Enemy"
+				
+				if(outcome_code > 2)
+					outcome += " Yield";
+				else
+					outcome += " Victory";
+			}
+			break;
+		
+		case 5: outcome = "Stalemate"; break;
+		case 6: outcome = "Compromise"; break;
+		case 7: outcome = "Released"; break;
+		case 8: outcome = "Unclear"; break;
+		case 9: outcome = "Joins ongoing war"; break;
+		case -9: outcome = "Missing"; break;
+	}
+	$("#conflict-outcome").html("<h6>Outcome: </h6>" + outcome);
+	
+	
+	var fatality_code = parseInt(d.dispute[10]);
+	var fatality;	
+	switch(fatality_code){
+		/* There was a loss or a yield */	
+		case 0: fatality = "None"; break;
+		case 1: fatality = "1-25 deaths"; break;
+		case 2: fatality = "26-100 deaths"; break;
+		case 3: fatality = "101-250 deaths"; break;
+		case 4: fatality = "251-500 deaths"; break;
+		case 5: fatality = "501-999 deaths"; break;
+		case 6: fatality = ">999 deaths"; break;
+		case -9: fatality = "Missing"; break;
+	}
+	$("#conflict-fatality").html("<h6>Fatality Count: </h6>" + fatality);
+
+
+	var hostility_code = parseInt(d.dispute[14]);
+	var hostility;	
+	switch(hostility_code){
+		/* There was a loss or a yield */	
+		case 1: hostility = "No militarized action"; break;
+		case 2: hostility = "Threat to use force"; break;
+		case 3: hostility = "Display of force" ; break;
+		case 4: hostility = "Use of force"; break;
+		case 5: hostility = "War"; break;
+	}
+	$("#conflict-hostility").html("<h6>Hostility: </h6>" + hostility);
+		
+}
+
+function updateMap(){
+	/* Redraw map with conflicts in time range */
+	
+	/* Add points for current conflict */
 }
 
 
