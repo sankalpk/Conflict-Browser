@@ -9,9 +9,11 @@ var date_start, date_end;
 var x_end_max = 585;
 var x_start_min = 10;
 
-/* The reference country */
+/* The reference country and its dispute data */
 var ccode;
 var disputes;
+var disputes_per_year = {};
+var max_disputes_in_year = 0;
 
 /* For timeline interactions */
 var drag_start = false;
@@ -79,7 +81,33 @@ function updateWithCountry(country_code){
 			success: function(data){
 				disputes = data.disputes;
 				
+				/* Update disputes per year */
+				for(var i=1812; i<1993; i++){
+					disputes_per_year[i+""] = 0;
+				}
+				
+				for(var year in disputes){
+					for(var i = 0; i<disputes[year].length; i++){
+						var start = parseInt(disputes[year][i].dispute[4]);
+						var end = parseInt(disputes[year][i].dispute[7]);
+						
+						for(var j=start; j<end; j++){
+							disputes_per_year[j+""]++;
+						}
+					}
+				}
+				
+				/* Update the maximum number of disputes found */
+				max_disputes_in_year = 0;
+				for(var i=1812; i<1993; i++){
+					var num_disp = disputes_per_year[i+""];
+					if(num_disp > max_disputes_in_year)
+						max_disputes_in_year = num_disp;
+				}
+				
+				
 				/* Update the timeline */
+				drawTimeline(date_start, date_end);
 				
 				/* Update the conflict DOM */
 				
@@ -119,13 +147,21 @@ function drawTimeline(slider_start, slider_end){
 	timeline_context.fillRect(10, 70, 580, 5);
 	timeline_context.strokeRect(10, 70, 580, 5);
 	
-	/* TODO: Timeline data 
-	if(disputes !=== undefined){
-		for(var i=0; i<disputes.length; i++){
-			
+	/* TODO: Timeline data */
+	if(disputes_per_year !== undefined){
+		timeline_context.fillStyle = "rgba(240, 150, 150, 1);"
+		var bar_width = yearsTotimelinePixels(1);
+		var bar_inc = 65/max_disputes_in_year;
+		for(var year in disputes_per_year){
+			if(disputes_per_year[year]>0){
+				timeline_context.fillRect(
+					yearTotimelinePixels(parseInt(year)), 
+					70-(bar_inc*disputes_per_year[year]), 
+					bar_width, 
+					bar_inc*disputes_per_year[year]);
+			}
 		}
 	}
-	*/
 	
 	/* Timeline sliders */
 	timeline_context.fillStyle = "#866";
@@ -218,5 +254,9 @@ function timelinePixelToYear(pixel){
 }
 
 function yearsTotimelinePixels(years){
-	return 10 + Math.round(years*575/176);
+	return Math.round(years*575/176);
+}
+
+function yearTotimelinePixels(year){
+	return 10 + Math.round((year-1816)*575/176);
 }
