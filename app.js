@@ -129,8 +129,13 @@ app.get("/libraries",function(request, response){ //get all libraries
 
 app.get("/libraries/:name",function(request,response){ //get one library by name
   var name=request.params.name;
+  var conflicts={};
+  libraries[name].disputes.forEach(function(x){
+    conflicts[x]=(disputes[x]);
+  }); 
   response.send({
     library: libraries[name],
+    disputes: conflicts,
     success:true
   });
 });
@@ -142,8 +147,6 @@ app.get("/libraries/disputein/:name/:ccode",function(request, response){ //retur
   libraries[name].disputes.forEach(function(x){ //uses closures
     if(x===ccode) inArray=true;
   });
-  console.log(inArray);
-
   response.send({
     inArray: inArray,
     success:true
@@ -152,6 +155,7 @@ app.get("/libraries/disputein/:name/:ccode",function(request, response){ //retur
 
 app.post("/libraries", function(request, response) { //create a new library associated with "name"
   libraries[request.body.name]={
+                  "name": request.body.name,
                   "disputes": [],
                   "description": request.body.description,
                   "date_modified": new Date(),
@@ -170,7 +174,9 @@ app.post("/libraries", function(request, response) { //create a new library asso
 app.put("/libraries/:name", function(request, response){//updates user library with new array of disputes or description
   var name=request.params.name;
   var oldItem=libraries[name];
-  var library={ "disputes": JSON.parse(request.body.disputes), //an array of dispute ids
+  var library={ 
+                "name": name,
+                "disputes": JSON.parse(request.body.disputes), //an array of dispute ids
                 "description": request.body.description,
                 "date_modified": new Date(),
                 "date_added": oldItem.date_added,
