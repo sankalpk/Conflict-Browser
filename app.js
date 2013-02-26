@@ -147,8 +147,6 @@ app.get("/libraries/:name",function(request,response){ //get one library by name
 app.get("/libraries/disputein/:name/:id",function(request, response){ //returns whether the dispute id is in the library
   var name=request.params.name;
   var id = request.params.id;
-  console.log(typeof(id));
-  console.log(id);
   var inArray=false;
   if(libraries[name] !== undefined && libraries[name].disputes !== undefined){
 	  libraries[name].disputes.forEach(function(x){ //uses closures
@@ -168,11 +166,11 @@ app.post("/libraries", function(request, response) { //create a new library asso
                   "description": request.body.description,
                   "date_modified": new Date(),
                   "date_added": new Date(),
-                  "year_start": -1,
-                  "year_end": -1,
+                  "time_start": "N/A",
+                  "time_end": "N/A",
                   "kudos":0
                   };
-  writeFile("libraries.json", JSON.stringify(libraries));
+  writeFile("static/data/libraries.json", JSON.stringify(libraries));
   response.send({
     library: libraries[request.body.name],
     success: true
@@ -182,20 +180,21 @@ app.post("/libraries", function(request, response) { //create a new library asso
 app.put("/libraries/:name", function(request, response){//updates user library with new array of disputes or description
   var name=request.params.name;
   var oldItem=libraries[name];
+  var libraryStartAndEnd = getStartAndEnd(oldItem);
   var library={ 
                 "name": name,
                 "disputes": JSON.parse(request.body.disputes), //an array of dispute ids
                 "description": request.body.description,
                 "date_modified": new Date(),
                 "date_added": oldItem.date_added,
-                "time_start": -1, //TODO write a function to calculate time range and change
-                "time_end": -1,
+                "time_start": libraryStartAndEnd[0], //TODO write a function to calculate time range and change
+                "time_end": libraryStartAndEnd[1],
                 "kudos": oldItem.kudos
               };
   library.disputes = (library.disputes !== undefined) ? library.disputes : oldItem.disputes;
   library.description = (library.description !== undefined) ? library.description : oldItem.description;
   libraries[name]= library;
-  writeFile("libraries.json", JSON.stringify(libraries));
+  writeFile("static/data/libraries.json", JSON.stringify(libraries));
 
   response.send({
     library: library,
@@ -207,26 +206,44 @@ app.put("/libraries/adddispute/:name", function(request, response){//updates use
   var name=request.params.name;
   var oldItem=libraries[name];
   oldItem.disputes.push(request.body.dispute);
+  var libraryStartAndEnd = getStartAndEnd(oldItem);
   var library={ 
                 "name": name,
                 "disputes": oldItem.disputes, //an array of dispute ids
                 "description": request.body.description,
                 "date_modified": new Date(),
                 "date_added": oldItem.date_added,
-                "time_start": -1, //TODO write a function to calculate time range and change
-                "time_end": -1,
+                "time_start": libraryStartAndEnd[0],
+                "time_end": libraryStartAndEnd[1],
                 "kudos": oldItem.kudos
               };
   library.disputes = (library.disputes !== undefined) ? library.disputes : oldItem.disputes;
   library.description = (library.description !== undefined) ? library.description : oldItem.description;
   libraries[name]= library;
-  writeFile("libraries.json", JSON.stringify(libraries));
+  writeFile("static/data/libraries.json", JSON.stringify(libraries));
 
   response.send({
     library: library,
     success: true
   });
 });
+
+
+function getStartAndEnd(lib){
+	var date_start = "N/A";
+	var date_end = "N/A";
+	
+	for(var i=0; i<lib.disputes.length; i++){
+		var id = lib.disputes[i];
+		var dispute = disputes[id];
+		if(dispute[4] < date_start || date_start === "N/A")
+			date_start = dispute[4];
+		if(dispute[7] > date_end  || date_end === "N/A")
+			date_end = dispute[7];
+	}
+	
+	return [date_start, date_end];
+}
 
 
 app.delete("/libraries/deldispute/:name", function(request, response){//updates user library with new array of disputes or description
@@ -248,7 +265,7 @@ app.delete("/libraries/deldispute/:name", function(request, response){//updates 
   library.disputes = (library.disputes !== undefined) ? library.disputes : oldItem.disputes;
   library.description = (library.description !== undefined) ? library.description : oldItem.description;
   libraries[name]= library;
-  writeFile("libraries.json", JSON.stringify(libraries));
+  writeFile("static/data/libraries.json", JSON.stringify(libraries));
 
   response.send({
     library: library,
@@ -259,7 +276,7 @@ app.delete("/libraries/deldispute/:name", function(request, response){//updates 
 app.put("/libraries/:name/kudos", function(request, response){ //give kudos to a library
   var name=request.params.name;
   libraries[name].kudos+=1;
-  writeFile("libraries.json", JSON.stringify(libraries));
+  writeFile("static/data/libraries.json", JSON.stringify(libraries));
 
   response.send({
     library: libraries[name],

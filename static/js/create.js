@@ -108,17 +108,7 @@ function deleteLib(){
 
 function publishLib(){
 	if(lib !== undefined){
-		$.ajax({
-		    type: "get",
-		    data: {},
-		    url: "",
-		    success: function(data){
-			    /* Redirect to the share page */
-			    if(data.success){
-				    window.location = "index.html";
-			    }
-		    }
-	    });
+		window.location = "share.html?name="+lib.name;
     }	
 }
 
