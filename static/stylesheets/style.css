@@ -17,6 +17,7 @@ body{
 	height: 50px;
 	background-color: #EEF;
 	text-align: center;
+  padding-top:10px;
 }
 
 #flow{
@@ -304,6 +305,64 @@ h6{
   width: 150px;
 }
 
+
+#library_description{
+  width:50%;
+  margin:auto;
+  padding-bottom:30px;
+  font-size:15px;
+}
+#form-err{
+	color: #F44;
+	font-size: 12px;
+}
+
+#library-conflicts{
+	margin-top: 50px;
+	margin-bottom: 75px;
+	font-size: 14px;
+	border-top: 2px solid black;
+}
+
+.library-conflict{
+	width: 600px;
+	height: 50px;
+	background-color: #FFE;
+	vertical-align: bottom;
+	padding: 2px;
+	margin-left: 20px;
+	margin-bottom: 20px;
+	border: 1px solid grey;
+	display: block;
+}
+
+.library-conflict-name{
+	display: inline-block;
+	text-align: left;
+	width: 300px;
+}
+
+.library-conflict-years{
+	display: inline-block;
+	text-align: left;
+	width: 175px;
+}
+
+#library-title{
+	font-weight: 600;
+	font-size: 20px;
+	padding: 10px;
+	margin-bottom: 50px;
+	border-bottom: 2px solid black;
+}
+
+#library-options{
+	margin-top: 50px;
+	padding: 10px;
+	border-top: 2px solid black;
+}
+
+
 /* Libraries */
 
 
@@ -389,55 +448,5 @@ h6{
   margin-right:auto;
   margin-top:15px;
   width:100px;
-}
-
-#form-err{
-	color: #F44;
-	font-size: 12px;
-}
-
-#library-conflicts{
-	margin-top: 50px;
-	margin-bottom: 75px;
-	font-size: 14px;
-	border-top: 2px solid black;
-}
-
-.library-conflict{
-	width: 600px;
-	height: 50px;
-	background-color: #FFE;
-	vertical-align: bottom;
-	padding: 2px;
-	margin-left: 20px;
-	margin-bottom: 20px;
-	border: 1px solid grey;
-	display: block;
-}
-
-.library-conflict-name{
-	display: inline-block;
-	text-align: left;
-	width: 300px;
-}
-
-.library-conflict-years{
-	display: inline-block;
-	text-align: left;
-	width: 175px;
-}
-
-#library-title{
-	font-weight: 600;
-	font-size: 20px;
-	padding: 10px;
-	margin-bottom: 50px;
-	border-bottom: 2px solid black;
-}
-
-#library-options{
-	margin-top: 50px;
-	padding: 10px;
-	border-top: 2px solid black;
 }
 
