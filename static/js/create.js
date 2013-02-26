@@ -19,6 +19,12 @@ var max_disputes_in_year = 0;
 var drag_start = false;
 var drag_end = false;
 
+/* Map between country codes, coordinates, and pixels on the map */
+var coordinates;
+
+/* The current libarary we are adding to */
+var lib;
+
 
 window.onload = function(){
 
@@ -35,7 +41,7 @@ window.onload = function(){
   	setTimelineInteractions();
 
   	/* Draw the map */  	
-  	map = new Image();
+  	var map = new Image();
   	map.onload = function(){
   		map_context.drawImage(map, 0, 0);
   	};
@@ -46,7 +52,7 @@ window.onload = function(){
 		type: "get",
 		url: "/coordinates",
 		success: function(data) {
-			var coordinates = data.coordinates;
+			coordinates = data.coordinates;
 			var sel = $("#country-input");
 			sel.change(updateWithCountry());
 			for(var country_code in coordinates){
@@ -61,8 +67,42 @@ window.onload = function(){
 }
 
 
+function createLibrary(){
+	console.log("HERE");
+	$.ajax({
+		type: "get",
+		url: "/libraries/"+$("#libname").val(),
+		success: function(data){
+			console.log(data.library);
+			//Unique library
+			if(data.success && data.library === undefined){
+				$.ajax({
+					type: "post",
+					url: "/libraries",
+					data: {"name": $("#libname").val(), "description": $("#libdesc").val()},
+					success: function(data){
+						console.log("successfully added");
+						lib = data.library;
+						
+						/* Go to next create phase */
+						$(".create-1").css("display", "none");
+						$(".create-2").css("display", "block");
+					}
+				});
+			}
+			//It already exists
+			else{
+				$("#form-err").html("Sorry, a library with that name already exists");
+			}
+		}
+	});
+	
+	return false;
+}
+
+
 /* Given a new country, updates the enire page */
-function updateWithCountry(country_code){
+function updateWithCountry(){
 	return function(){
 	
 		/* Get the selected country code */
@@ -113,7 +153,7 @@ function updateWithCountry(country_code){
 				updateConflicts();
 				
 				/* Update the map */
-				
+				updateMap();
 			}
 		});
 	};
@@ -177,7 +217,9 @@ function updateDetails(year, i){
 	$("#conflict-vs").css("display", "block");
 	
 	var outcome_code = parseInt(d.dispute[8]);
-	var outcome;	
+	var outcome;
+	console.log(d);
+	console.log(outcome_code);
 	switch(outcome_code){
 		/* There was a loss or a yield */
 		case 1:
@@ -185,10 +227,10 @@ function updateDetails(year, i){
 		case 3:
 		case 4: 		
 			if(outcome_code%2 == 1){
-				if($.inArray(ccode, d.dispute[0]))
-					outcome = "Enemy";
+				if($.inArray(ccode, d.dispute[0]) > -1)
+					outcome = "Allied";
 				else
-					outcome = "Allied"
+					outcome = "Enemy"
 					
 				if(outcome_code > 2)
 					outcome += " Yield";
@@ -196,7 +238,7 @@ function updateDetails(year, i){
 					outcome += " Victory";
 			}
 			else{
-				if($.inArray(ccode, d.dispute[0]))
+				if($.inArray(ccode, d.dispute[1]) > -1)
 					outcome = "Allied";
 				else
 					outcome = "Enemy"
@@ -247,39 +289,79 @@ function updateDetails(year, i){
 	$("#conflict-hostility").html("<h6>Hostility: </h6>" + hostility);
 
 	/* Search google button appears only if the conflict is named */
+	if(d.dispute[16] !== undefined){
+		$("#search-google").attr("onclick", "window.open('https://www.google.com/search?q="+d.dispute[16]+"','_blank')")
+		$("#search-google").attr("disabled", false);
+	}
+	else{
+		$("#search-google").attr("disabled", true);
+	}
 	
 	/* Add to library button is only enabled if the conflict isn't in the library */
-		
+	$("#add-to-lib").attr("disabled", true);
+	if(lib !== undefined){
+		$.ajax({
+		    type: "get",
+		    url: "/disputes/disputein/"+lib+"/"+ccode,
+		    success: function(data){
+		    	if(data.success && !data.inArray){
+			    	$("#add-to-lib").attr("disabled", false);
+			    }
+		    }
+	    });
+    }
 }
 
 function updateMap(){
-	/* Redraw map with conflicts in time range */
-	var start_yr = timelinePixelToYear(date_start);
-	var end_yr = timelinePixelToYear(date_end);
-
+	/* Clear the map */
+	map_context.clearRect(0,0, map_canvas.width, map_canvas.height);
+ 
+	/* Redraw the background */
+	var map = new Image();
+  	map.onload = function(){
+	  	map_context.drawImage(map, 0, 0);
+	  	
+	  	/* Redraw map with conflicts in time range */
+		var start_yr = timelinePixelToYear(date_start);
+		var end_yr = timelinePixelToYear(date_end);
+		
+		for(var year in disputes){
+			if(parseInt(year) < start_yr || parseInt(year) > end_yr)
+				continue;
+			
+			for(var i = 0; i<disputes[year].length; i++){
+				/* Draw allies */
+				var allies = disputes[year][i].allies;
+				map_context.fillStyle = "rgba(50,50,250,.2)";
+				for(var j=0; j<allies.length; j++){
+					if (allies[j] !== ccode && coordinates[allies[j]]!==undefined){
+						var x = coordinates[allies[j]][3].x *.75 -70;
+						var y = coordinates[allies[j]][3].y *.75 -50;
+						map_context.fillRect(x, y, 10, 10);
+					}
+				}
+							
+				/* Draw enemies*/
+				var enemies = disputes[year][i].enemies;
+				map_context.fillStyle = "rgba(250,50,50,.2)";
+				for(var j=0; j<enemies.length; j++){
+					if(coordinates[enemies[j]] !== undefined){
+						var x = coordinates[enemies[j]][3].x *.75 -70;
+						var y = coordinates[enemies[j]][3].y *.75 -50;
+						map_context.fillRect(x, y, 10, 10);
+					}
+				}
 	
-	for(var year in disputes){
-		if(parseInt(year) < start_yr || parseInt(year) > end_yr)
-			continue;
-		for(var i = 0; i<disputes[year].length; i++){
-			/* Draw allies */
-			var allies = disputes[year][i].allies;
-			for(var j=0; j<allies.length; j++){
-			//	if (allies[j] !== ccode)
-				console.log(allies[i]);
 			}
-						
-			/* Draw enemies*/
-			var enemies = disputes[year][i].enemies;
-			for(var j=0; j<enemies.length; j++){
-				console.log(enemies[j]);
-			}
-
 		}
-	}
 		
+		/* TODO: Use Google Maps to mitigate inaccuracies */
+		/* TODO: Highlight points for current conflict */
+		/* TODO: Draw bezier curves between relationships */
 		
-	/* Add points for current conflict */
+  	};
+  	map.src = "images/world.75.png";		
+		
 }
 
 
@@ -311,7 +393,7 @@ function drawTimeline(slider_start, slider_end){
 	timeline_context.fillRect(10, 70, 580, 5);
 	timeline_context.strokeRect(10, 70, 580, 5);
 	
-	/* TODO: Timeline data */
+	/* Timeline data */
 	if(disputes_per_year !== undefined){
 		timeline_context.fillStyle = "rgba(240, 150, 150, 1);"
 		var bar_width = yearsTotimelinePixels(1);
@@ -387,9 +469,8 @@ function setTimelineInteractions(){
 			
 			/* Redraw conflicts list */
 			updateConflicts();
-						
 			/* Redraw the map */
-			
+			//updateMap();
 		}
 		
 		else if(drag_end && (timelinePixelToYear(x)-timelinePixelToYear(date_start) >= 20) && (x<x_end_max)){
@@ -398,8 +479,8 @@ function setTimelineInteractions(){
 			
 			/* Redraw conflicts list */
 			updateConflicts();
-			
 			/* Redraw the map */
+			//updateMap();
 		}
 		
 	}, false);
@@ -408,6 +489,7 @@ function setTimelineInteractions(){
 		drag_start = false;
 		drag_end = false;
 		updateConflicts();
+		updateMap();
 
 	}, false);
 
