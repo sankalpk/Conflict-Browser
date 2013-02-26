@@ -6,6 +6,8 @@ body{
 	font-family:"Armata",sans-serif;
   font-weight: 300;
 	font-size: 16px;
+  background-image:url('subtle_grunge.png');
+  background-size: cover;
 }
 h1{
   font-size:45px;
@@ -407,20 +409,23 @@ h6{
 /* Libraries */
 
 
-.lib{
+.lib{/*curr*/
   margin:10px;
   text-align:left;
   display:block;
   position:relative;
-  /*border:2px solid black;*/
   margin:10px 20px;
-  padding:20px;
-  background-color:#EEE;
+  background-color:#8a1517;
   font-size:16px;
 }
 
 .name{
   font-size:20px;
+  color:white;
+  font-family:"Armata",sans-serif;
+  padding:20px;
+
+
 }
 
 .date_modified{
@@ -429,6 +434,8 @@ h6{
   top:0px;
   padding:20px;
   opacity: .6;
+  color:white;
+  font-family:"Geo",sans-serif;
 }
 
 .extra_info{
@@ -436,6 +443,7 @@ h6{
   padding-top:15px;
   height:200px;
   text-align:center;
+  background-color:white;
 
 }
 
@@ -445,6 +453,7 @@ h6{
 }
 
 .description{
+  padding-left:10px;
   position:absolute;
   text-align:left;
   width:33%;
@@ -485,5 +494,11 @@ h6{
   margin-right:auto;
   margin-top:15px;
   width:100px;
+  background-color:#8a1f17;
+  font-family:"Armata",sans-serif;
 }
 
+.button a{
+  text-decoration:none;
+  color:white;
+} 
