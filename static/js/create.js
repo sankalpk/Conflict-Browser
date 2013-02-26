@@ -19,6 +19,9 @@ var max_disputes_in_year = 0;
 var drag_start = false;
 var drag_end = false;
 
+/* The currently viewed dispute */
+var curr_dispute;
+
 /* Map between country codes, coordinates, and pixels on the map */
 var coordinates;
 
@@ -67,8 +70,20 @@ window.onload = function(){
 }
 
 
+function addToLib(){
+	if(lib !== undefined){
+		$.ajax({
+		    type: "put",
+		    data: {"dispute": curr_dispute[0]},
+		    url: "/libraries/adddispute/"+lib.name,
+		    success: function(data){
+		    	console.log(data);
+		    }
+	    });
+    }	
+}
+
 function createLibrary(){
-	console.log("HERE");
 	$.ajax({
 		type: "get",
 		url: "/libraries/"+$("#libname").val(),
@@ -191,6 +206,7 @@ function updateConflicts(){
 
 function updateDetails(year, i){
 	var d = disputes[year][i];
+	curr_dispute = d.dispute;
 	
 	if(d.dispute[16] !== undefined)
 		$("#conflict-name").html(d.dispute[16]);
@@ -302,10 +318,15 @@ function updateDetails(year, i){
 	if(lib !== undefined){
 		$.ajax({
 		    type: "get",
-		    url: "/disputes/disputein/"+lib+"/"+ccode,
+		    url: "/libraries/disputein/"+lib.name+"/"+ccode,
 		    success: function(data){
+		    	console.log(data);
 		    	if(data.success && !data.inArray){
 			    	$("#add-to-lib").attr("disabled", false);
+			    	$("#add-to-lib").html("Add to Library");
+			    }
+			    else{
+				    $("#add-to-lib").html("Added to Library");
 			    }
 		    }
 	    });
