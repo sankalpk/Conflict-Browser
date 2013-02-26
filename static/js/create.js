@@ -132,6 +132,7 @@ function updateLibraryConflicts(){
 		var name = $("<div class='library-conflict-name'>").html(c.name);
 		var years = $("<div class='library-conflict-years'>").html(c.years);
 		var remove = $("<button class='button'>").html("Remove");
+		remove.attr("onclick", "removeConflict("+id+")");
 		//remove.attr("onclick", );
 		conflict.append(name).append(years).append(remove);
 		list.append(conflict);
