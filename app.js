@@ -198,6 +198,31 @@ app.put("/libraries/:name", function(request, response){//updates user library w
   });
 });
 
+app.put("/libraries/adddispute/:name", function(request, response){//updates user library with new array of disputes or description
+  var name=request.params.name;
+  var oldItem=libraries[name];
+  var disputes=oldItem.disputes.push(request.body.dispute);
+  var library={ 
+                "name": name,
+                "disputes": JSON.parse(disputes), //an array of dispute ids
+                "description": request.body.description,
+                "date_modified": new Date(),
+                "date_added": oldItem.date_added,
+                "time_start": -1, //TODO write a function to calculate time range and change
+                "time_end": -1,
+                "kudos": oldItem.kudos
+              };
+  library.disputes = (library.disputes !== undefined) ? library.disputes : oldItem.disputes;
+  library.description = (library.description !== undefined) ? library.description : oldItem.description;
+  libraries[name]= library;
+  writeFile("libraries.json", JSON.stringify(libraries));
+
+  response.send({
+    library: library,
+    success: true
+  });
+});
+
 app.put("libraries/:name/kudos", function(request, response){ //give kudos to a library
   var name=request.params.name;
   libraries[name].kudos+=1;
