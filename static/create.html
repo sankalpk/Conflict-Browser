@@ -92,14 +92,25 @@
 							</div>
 							<div id = "conflict-footer">
 								<button id="search-google" class="button" onclick="window.open('http://www.google.com/search?q=','_blank')">Search Google</button>
-																								<button id="add-to-lib" class="button" disabled="true">Add to Library</button>
+																								<button id="add-to-lib" class="button" onclick="addToLib()" disabled="true">Add to Library</button>
 
 							</div>
 						</div>
 						
 					</div>
+					
 					<canvas id="map" width="600px" height="391px">
 					</canvas>
+					
+					
+					<div id="library-conflicts">
+						<div id = "library-title">Current Library</div>
+						<div id = "library-list"></div>
+						<div id="library-options">
+							<button class="button" onclick="deleteLib()">Delete Library</button>
+							<button class="button" onclick="publishLib()">Publish Library</button>
+						</div>
+					</div>
 					
 				</div>
 				

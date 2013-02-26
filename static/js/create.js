@@ -19,11 +19,15 @@ var max_disputes_in_year = 0;
 var drag_start = false;
 var drag_end = false;
 
+/* The currently viewed dispute */
+var curr_dispute;
+
 /* Map between country codes, coordinates, and pixels on the map */
 var coordinates;
 
-/* The current libarary we are adding to */
+/* The current library we are adding to */
 var lib;
+var lib_conflicts;
 
 
 window.onload = function(){
@@ -64,16 +68,99 @@ window.onload = function(){
 		}
 	});	
 
+	/* Initialize library object */
+	lib_conflicts = new Object();
 }
 
 
+function removeConflict(id){
+	if(lib !== undefined){
+		$.ajax({
+		    type: "delete",
+		    data: {"dispute": id},
+		    url: "/libraries/deldispute/"+lib.name,
+		    success: function(data){
+			    /* Redraw the library */
+			    if(data.success){
+			    	this.lib = data.library;
+			    	delete lib_conflicts[id];
+				    updateLibraryConflicts();
+			    }
+		    }
+	    });
+    }	
+}
+
+function deleteLib(){
+	if(lib !== undefined){
+		$.ajax({
+		    type: "delete",
+		    url: "/libraries/"+lib.name,
+		    success: function(data){
+			    /* Redirect to the index */
+			    if(data.success){
+				    window.location = "index.html";
+			    }
+		    }
+	    });
+    }	
+}
+
+function publishLib(){
+	if(lib !== undefined){
+		$.ajax({
+		    type: "get",
+		    data: {},
+		    url: "",
+		    success: function(data){
+			    /* Redirect to the share page */
+			    if(data.success){
+				    window.location = "index.html";
+			    }
+		    }
+	    });
+    }	
+}
+
+/* Redraws the library conflicts */
+function updateLibraryConflicts(){
+	var list = $("#library-list");
+	list.html("");
+	for(var id in lib_conflicts) {
+		var c = lib_conflicts[id];
+		var conflict = $("<div class='library-conflict'>");
+		var name = $("<div class='library-conflict-name'>").html(c.name);
+		var years = $("<div class='library-conflict-years'>").html(c.years);
+		var remove = $("<button class='button'>").html("Remove");
+		remove.attr("onclick", "removeConflict("+id+")");
+		//remove.attr("onclick", );
+		conflict.append(name).append(years).append(remove);
+		list.append(conflict);
+	}
+	
+}
+
+function addToLib(){
+	if(lib !== undefined){
+		$.ajax({
+		    type: "put",
+		    data: {"dispute": curr_dispute.dispute_id},
+		    url: "/libraries/adddispute/"+lib.name,
+		    success: function(data){
+		    	$("#add-to-lib").html("Added to Library");
+		    	$("#add-to-lib").attr("disabled", true);
+		    	lib_conflicts[curr_dispute.dispute_id] = curr_dispute;
+		    	updateLibraryConflicts();
+		    }
+	    });
+    }	
+}
+
 function createLibrary(){
-	console.log("HERE");
 	$.ajax({
 		type: "get",
 		url: "/libraries/"+$("#libname").val(),
 		success: function(data){
-			console.log(data.library);
 			//Unique library
 			if(data.success && data.library === undefined){
 				$.ajax({
@@ -81,7 +168,6 @@ function createLibrary(){
 					url: "/libraries",
 					data: {"name": $("#libname").val(), "description": $("#libdesc").val()},
 					success: function(data){
-						console.log("successfully added");
 						lib = data.library;
 						
 						/* Go to next create phase */
@@ -191,12 +277,19 @@ function updateConflicts(){
 
 function updateDetails(year, i){
 	var d = disputes[year][i];
+	curr_dispute = d;
 	
-	if(d.dispute[16] !== undefined)
+	if(d.dispute[16] !== undefined){
 		$("#conflict-name").html(d.dispute[16]);
-	else
-		$("#conflict-name").html("Unnamed Conflict");	
+		curr_dispute.name = d.dispute[16]; 
+	}
+	else{
+		$("#conflict-name").html("Unnamed Conflict");
+		curr_dispute.name = "Unnamed Conflict";	
+	}
+	
 	$("#conflict-date").html(d.dispute[4] + " - " + d.dispute[7]);
+	curr_dispute.years = d.dispute[4] + " - " + d.dispute[7];
 	
 	var allies = $("#conflict-vs #allies ul");
 	allies.html("");
@@ -218,8 +311,6 @@ function updateDetails(year, i){
 	
 	var outcome_code = parseInt(d.dispute[8]);
 	var outcome;
-	console.log(d);
-	console.log(outcome_code);
 	switch(outcome_code){
 		/* There was a loss or a yield */
 		case 1:
@@ -302,10 +393,14 @@ function updateDetails(year, i){
 	if(lib !== undefined){
 		$.ajax({
 		    type: "get",
-		    url: "/disputes/disputein/"+lib+"/"+ccode,
+		    url: "/libraries/disputein/"+lib.name+"/"+d.dispute_id,
 		    success: function(data){
 		    	if(data.success && !data.inArray){
 			    	$("#add-to-lib").attr("disabled", false);
+			    	$("#add-to-lib").html("Add to Library");
+			    }
+			    else if(data.success){
+				    $("#add-to-lib").html("Added to Library");
 			    }
 		    }
 	    });
