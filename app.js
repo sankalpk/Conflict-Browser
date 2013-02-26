@@ -129,10 +129,13 @@ app.get("/libraries",function(request, response){ //get all libraries
 
 app.get("/libraries/:name",function(request,response){ //get one library by name
   var name=request.params.name;
+
   var conflicts={};
-  libraries[name].disputes.forEach(function(x){
-    conflicts[x]=(disputes[x]);
-  }); 
+  if(libraries[name]!=undefined){
+    libraries[name].disputes.forEach(function(x){
+      conflicts[x]=(disputes[x]);
+    });
+  }
   response.send({
     library: libraries[name],
     disputes: conflicts,

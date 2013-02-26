@@ -4,7 +4,8 @@ var disputes;
 window.onload = function(){
   var url=window.location.href;
   var name=decodeURI(url.substring(url.indexOf("name")+5));
-  getLibrary(name);
+  console.log(name);
+  //getLibrary(name);
 }
 
 
@@ -28,7 +29,7 @@ function addClickToAllConflicts(){
   })
 }
 
-function createConflictLi(dispute){
+function createConflictLi(dispute,dispute_id){
   var li=$("<li>");
   li.html(dispute[16]);
   return li;
@@ -41,7 +42,7 @@ function loadConflictDetails(dispute){
 function getLibrary(name){
   $.ajax({
     type: "get",
-    url: "/libraries/"+encodeURI(name),
+    url: "/libraries/"+name,
     success: function(data) {
       loadLibrary(data.library,data.disputes);
     }
