@@ -32,14 +32,22 @@ function addClickToAllConflicts(disputes){
 
 function createConflictLi(dispute,dispute_id){
   var li=$("<li>").attr("dispute_id",dispute_id);
-  li.html(dispute[16]);
+  if(dispute[16] !== undefined)
+  	li.html(dispute[16]);
+  else
+  	li.html("Unnamed Conflict of " + dispute[4]);
   return li;
 }
 
 function loadConflictDetails(dispute_id,disputes){
   $("#conflict-vs").css("display","block"); //someone changed style to none, change here programatically
   var currDispute=disputes[dispute_id];
-  $("#conflict-name").html(currDispute[16]);
+  
+  if(currDispute[16] !== undefined)
+  	$("#conflict-name").html(currDispute[16]);
+  else
+  	$("#conflict-name").html("Unnamed Conflict");
+  
   $("#conflict-date").html(currDispute[4]+" - "+currDispute[7]);
   //allies and enemies
   var allies=$("#allies ul");
