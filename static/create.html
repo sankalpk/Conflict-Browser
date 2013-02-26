@@ -28,12 +28,14 @@
 			
 			<div class = "create-1">
 				<div id="form-wrapper">
-					<form>
-						<label for="libname">Name</label>
-						<input name="libname" type="text" size="50"></input>
+					<div id = "form-err">
+					</div>
+					<form onsubmit="return createLibrary()">
+						<label for="libname">Library Name</label>
+						<input id="libname" name="libname" type="text" size="50"></input>
 		
 						<label for="libdesc">Description</label>
-						<textarea name="libdesc" type="text" rows="5" cols="50"></textarea>
+						<textarea id="libdesc" name="libdesc" type="text" rows="5" cols="50"></textarea>
 						
 						<input class="button" id="formsubmit" type="submit" value="Next"></input>
 					</form>
@@ -89,8 +91,8 @@
 								</div>
 							</div>
 							<div id = "conflict-footer">
-								<button class="button">Search Google</button>
-																								<button class="button" disabled="true">Add to Library</button>
+								<button id="search-google" class="button" onclick="window.open('http://www.google.com/search?q=','_blank')">Search Google</button>
+																								<button id="add-to-lib" class="button" disabled="true">Add to Library</button>
 
 							</div>
 						</div>
