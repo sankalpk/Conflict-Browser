@@ -17,6 +17,7 @@ body{
 	height: 50px;
 	background-color: #EEF;
 	text-align: center;
+  padding-top:10px;
 }
 
 #flow{
@@ -390,7 +391,14 @@ h6{
   width:100px;
 }
 
+#library_description{
+  width:50%;
+  margin:auto;
+  padding-bottom:30px;
+  font-size:15px;
+}
 #form-err{
 	color: #F44;
 	font-size: 12px;
 }
+

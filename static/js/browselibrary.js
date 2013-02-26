@@ -7,6 +7,8 @@ window.onload = function(){
 
 /* Given a library, updates the entire page */
 function loadLibrary(library,disputes){
+  $("#flow").html(library.name)
+  $("#library_description").html(library.description);
   loadConflicts(disputes);
 }
 

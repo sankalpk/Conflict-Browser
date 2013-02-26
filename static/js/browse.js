@@ -50,7 +50,7 @@ function createLibraryView(key){
   var date_started=$("<li>").addClass("date_started").html("<h1>Date Started</h1><p>"+library.year_start+"</p>");
   var date_ended=$("<li>").addClass("date_ended").html("<h1>Date Ended</h1><p>"+library.year_end+"</p>");
   var buttons=$("<div>").addClass("buttons");
-  var view_lib=$("<li>").addClass("view_lib button").html('<a href="/library/'+encodeURI(key)+'">'+"View Library"+'</a>')
+  var view_lib=$("<li>").addClass("view_lib button").html('<a href="/static/browselibrary.html?name='+encodeURI(key)+'">'+"View Library"+'</a>')
   var download_json=$("<li>").addClass("download_json button").html('<a href="/libraries/'+encodeURI(key)+'">'+"Download JSON"+'</a>')
   ul.append(name,date_modified,extra_info);
   extra_info.append(description,dates,buttons);
