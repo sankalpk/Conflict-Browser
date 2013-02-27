@@ -90,6 +90,7 @@ h1{
   background-color:#ebf8ff;
   color:#6a0f10;
   border-bottom: 1px solid #EEE;
+  margin-bottom: 15px;
 }
 
 .selected{
@@ -99,6 +100,12 @@ h1{
 #content{
 	text-align: center;
 	padding: 30px;
+}
+
+.instructions{
+	display:block;
+	font-size: 14px;
+	margin-bottom: 25px;
 }
 
 .instruction{
