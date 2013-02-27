@@ -371,7 +371,7 @@ function updateDetails(year, i){
 
 	/* Search google button appears only if the conflict is named */
 	if(d.dispute[16] !== undefined){
-		$("#search-google").attr("onclick", "window.open('https://www.google.com/search?q="+d.dispute[16]+"','_blank')")
+		$("#search-google").attr("onclick", "window.open('https://www.google.com/search?q="+d.dispute[16]+" "+year+"','_blank')")
 		$("#search-google").attr("disabled", false);
 	}
 	else{
@@ -417,7 +417,7 @@ function updateMap(){
 			for(var i = 0; i<disputes[year].length; i++){
 				/* Draw allies */
 				var allies = disputes[year][i].allies;
-				map_context.fillStyle = "rgba(50,50,250,.2)";
+				map_context.fillStyle = "rgba(50,50,250,.4)";
 				for(var j=0; j<allies.length; j++){
 					if (allies[j] !== ccode && coordinates[allies[j]]!==undefined){
 						var x = coordinates[allies[j]][3].x *.75 -70;
@@ -428,7 +428,7 @@ function updateMap(){
 							
 				/* Draw enemies*/
 				var enemies = disputes[year][i].enemies;
-				map_context.fillStyle = "rgba(250,50,50,.2)";
+				map_context.fillStyle = "rgba(250,50,50,.4)";
 				for(var j=0; j<enemies.length; j++){
 					if(coordinates[enemies[j]] !== undefined){
 						var x = coordinates[enemies[j]][3].x *.75 -70;

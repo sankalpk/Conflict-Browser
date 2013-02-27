@@ -3,10 +3,11 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
 
 body{
 	/*font-family:"Droid Serif", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; */
-	font-family:"Armata",sans-serif;
+  font-family:"Armata",sans-serif;
   font-weight: 300;
-	font-size: 16px;
-  background-image:url('subtle_grunge.png');
+  font-size: 20px;
+  /*background-image:url('subtle_grunge.png');*/
+  background-repeat:repeat-x;
   background-size: cover;
 }
 h1{
@@ -19,11 +20,46 @@ h1{
 }*/
 
 #top{
-	background-color: #fff;
-	text-align: center;
+  background-color: #FEE;
+  text-align: center;
   position:relative;
-  height:40px;
+  height:80px;
+  font-size: 30px;
 }
+
+#top #logo{
+	position: absolute;
+	top: 20px;
+	left: 80px;
+}
+
+#logo #image{
+	position: absolute;
+	display: block;
+	width: 100px;
+	height: 100px;
+	top: 0px;
+	left: 0px;
+	
+}
+
+#top a{
+	color: #000;
+}
+
+#top a:visited{
+	color: #000;
+}
+
+#top a:hover{
+	color: #000;
+}
+
+#top a:active{
+	color: #000;
+}
+
+
 
 #top img{
   position:absolute;
@@ -63,13 +99,16 @@ h1{
 }
 
 #flow{
-	text-align: center;
-	font-size: 25px;
+  text-align: center;
+  font-size: 25px;
   font-family:"Armata",sans-serif;
+  font-weight: bold;
   padding:15px 0px;
-  background-color:#d1e5ee;
+  height: 30px;
+  background-color:#ebf8ff;
   color:#6a0f10;
-	border-bottom: 1px solid #EEE;
+  border-bottom: 1px solid #EEE;
+  margin-bottom: 15px;
 }
 
 .selected{
@@ -78,20 +117,28 @@ h1{
 
 #content{
 	text-align: center;
-	padding-bottom: 100px;
+	padding: 30px;
+}
+
+.instructions{
+	display:block;
+	font-size: 14px;
+	margin-bottom: 25px;
 }
 
 .instruction{
+	padding: 20px;
 	width: 500px;
 	display: inline-block;
 	text-align: center;
+	background-color: #FFF;
 }
 
 .button { /* base styles for all buttons */
     display: inline-block;
     margin: 5px;
     font-weight: bold;
-    font-size: 12px;
+    font-size: 15px;
     text-align: center;
     padding: 8px 12px;
     border-radius: 3px; /* css3 */
@@ -103,34 +150,32 @@ h1{
 .button:hover{
 	opacity: 1;
 }
-/*
-.button{ Dropbox button
-	color: #fff;
-	background: -webkit-gradient(linear, left top, left bottom, from(#37a3eb), to(#2181cf));
-	background: -moz-linear-gradient(top, #37a3eb, #2181cf);
-	text-shadow: rgba(0,0,0,0.2) 0 1px 0;
-	-webkit-text-shadow: rgba(0,0,0,0.2) 0 1px 0;
-	-moz-text-shadow: rgba(0,0,0,0.2) 0 1px 0;
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	-ms-border-radius: 3px;
-	-o-border-radius: 3px;
-	border-radius: 3px;
-	text-align: center;
-	padding: 10px 25px;
-	font-size: 15px;
-	font-weight: 400;
-	cursor: pointer;
-	overflow: visible;
-	opacity: .8;
-}*/
+
+#libname{
+	height: 30px;
+	width: 350px;
+	font-size: 13px;
+	margin-top: 10px;
+}
+
+#libdesc{
+	margin-top: 10px;
+}
 
 #browse{
-	background: #6688bb;
+	font-size: 15px;
+}
+
+#browse:hover{
+	background: #c3d8f8;
 }
 
 #create{
-	background: #cc5566;
+	font-size: 15px;
+}
+
+#create:hover{
+	background: #ffd4d4;
 }
 
 label{
@@ -193,12 +238,55 @@ label{
 	margin-bottom: 10px;
 }
 
+#legend{
+	font-size: 15px;
+	vertical-align: center;
+}
+
+#legend #red{
+	width: 15px;
+	height: 15px;
+	background-color: #F00;
+	display: inline-block;
+	margin: 5px;
+}
+
+#legend #blue{
+	width: 15px;
+	height: 15px;
+	background-color: #00F;
+	display: inline-block;
+	margin: 5px;
+}
+
+#legend #violet{
+	width: 15px;
+	height: 15px;
+	background-color: #800080;
+	display: inline-block;
+	margin: 5px;
+}
+
+#legend #label{
+	height: 20px;
+	width: 30px;
+	display: inline-block;
+	margin-right: 50px;
+}
+
 #vis{
 	width: 650px;
 	height: 600px;
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
+}
+
+#country-input{
+	height:30px; 
+	vertical-align:middle;
+	font-size: 13px;
+	width:300px;
 }
 
 .title{
@@ -370,7 +458,7 @@ h6{
 .library-conflict{
 	width: 600px;
 	height: 50px;
-	background-color: #FFE;
+	background-color: #FEE;
 	vertical-align: bottom;
 	padding: 2px;
 	margin-left: 20px;

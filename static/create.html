@@ -10,33 +10,47 @@
 	</head>
 
 	<body>
-    <div id ="top">
-      <a href="/static/index.html"><img src="/static/images/headersmall.png"></a>
+	<div id ="top">
+	  <a href = "index.html">
+		  <div id = "image"><img src = "images/noun_project_5111.png" width="49" height="63"></div>
+		  <div id="logo">
+		  Conflict Browser
+		  </div>		
+	  </a>		
       <div id="nav">
         <span><a href="/static/browse.html">Browse</a></span>
         <span><a href="/static/create.html">Create</a></span>
       </div>
-    </div>
+	</div>
+
     <div id = "flow">
-      Enter the following information for the library...
+      <div class ="create-1">    
+      	Name your library...
+      </div>
+      
+      <div class ="create-2">
+  		<div class ="create-2">
+			<div id="country-form">
+				<h3><form style="display:inline;"><select id="country-input" name="countryname" type="text">
+					<option value=""></option>
+				</select></form> 's disputes</h3>
+			</div>
+		</div>	
+      </div>
     </div>
-			<div class ="create-2">
-				<div id="country-form">
-					<h3><form style="display:inline;"><select id="country-input" name="countryname" type="text" style="height:20px; vertical-align:middle; width:300px">
-						<option value=""></option>
-					</select></form> 's disputes</h3>
-				</div>
-			</div>			
-		</div>
+    
 		<div id="content">
 			
 			<div class = "create-1">
+				<div class="instructions">
+					Select a name (required) and description for your library. These cannot be changed later, so choose wisely...
+				</div>
 				<div id="form-wrapper">
 					<div id = "form-err">
 					</div>
 					<form onsubmit="return createLibrary()">
 						<label for="libname">Library Name</label>
-						<input id="libname" name="libname" type="text" size="50"></input>
+						<input id="libname" name="libname" type="text" size="50" required></input>
 		
 						<label for="libdesc">Description</label>
 						<textarea id="libdesc" name="libdesc" type="text" rows="5" cols="50"></textarea>
@@ -47,7 +61,9 @@
 			</div>
 			
 			<div class ="create-2">
-			
+				<div class="instructions">
+					First, select a country above, then use the timeline to narrow down your results.<br/>The map will show you regions your country was allies or enemies with.
+				</div>
 				<div id = "vis">
 				
 					<canvas id="timeline" width="600px" height="100px">
@@ -105,6 +121,12 @@
 					
 					<canvas id="map" width="600px" height="391px">
 					</canvas>
+					
+					<div id="legend">
+						 <div id="label"> <div id="red"></div>Enemy</div>
+						 <div id="label"> <div id="blue"></div>Ally</div>
+						 <div id="label"><div id="violet"></div>Both</div>
+					</div>
 					
 					
 					<div id="library-conflicts">
