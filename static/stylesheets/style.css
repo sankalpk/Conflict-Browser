@@ -20,7 +20,7 @@ h1{
 }*/
 
 #top{
-  background-color: #fff;
+  background-color: #FEE;
   text-align: center;
   position:relative;
   height:80px;
@@ -42,6 +42,24 @@ h1{
 	left: 0px;
 	
 }
+
+#top a{
+	color: #000;
+}
+
+#top a:visited{
+	color: #000;
+}
+
+#top a:hover{
+	color: #000;
+}
+
+#top a:active{
+	color: #000;
+}
+
+
 
 #top img{
   position:absolute;
