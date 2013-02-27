@@ -598,7 +598,7 @@ h6{
   margin-left:auto;
   margin-right:auto;
   margin-top:15px;
-  width:100px;
+  width:105px;
   background-color:#8a1f17;
   font-family:"Armata",sans-serif;
   text-decoration:none;
@@ -610,3 +610,41 @@ a .button,a:visited,a:link{
   color:white;
 
 } 
+
+#marketing{
+  display:block;
+  position:absolute;
+  width:300px;
+  height:200px;
+
+}
+
+#mainpoint{
+  margin-top:15px;
+  font-size:30px;
+  font-weight: bold;
+  text-align:center;
+  line-height:35px;
+}
+
+#main_actions{
+  display:block;
+  position:absolute;
+  width:300px;
+  height:200px;
+  left:300px;
+  text-align:center;
+}
+
+#subpoint{
+  text-align:center;
+  margin-top:15px;
+}
+
+#homecontent{
+  position:relative;
+  margin:auto;
+  width:600px;
+  height:200px;
+
+}
