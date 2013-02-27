@@ -145,19 +145,23 @@ h1{
     box-shadow: 1px 1px 8px #666; /* css3 */
     background-color: #f6f6f6; 
     cursor: pointer; /* makes the cursor a "hand" instead of a "pointer" */
+      text-decoration:none;
 }
 
 .button:hover{
 	opacity: 1;
 }
 
-#libname{
+#libname,#shareURL{
 	height: 30px;
 	width: 350px;
 	font-size: 13px;
 	margin-top: 10px;
 }
 
+#shareURL{
+  margin-bottom:15px;
+}
 #libdesc{
 	margin-top: 10px;
 }
@@ -584,9 +588,12 @@ h6{
   width:100px;
   background-color:#8a1f17;
   font-family:"Armata",sans-serif;
+  text-decoration:none;
+
 }
 
-.button a{
+a .button,a:visited,a:link{
   text-decoration:none;
   color:white;
+
 } 
