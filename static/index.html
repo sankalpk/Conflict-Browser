@@ -1,39 +1,49 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Unit Project | Home</title>
-		<link rel="stylesheet" href="stylesheets/style.css" type="text/css"></link>
+  <head>
+    <title>Unit Project | Home</title>
+    <link rel="stylesheet" href="stylesheets/style.css" type="text/css"></link>
     <script src="js/jquery-1.9.0.js"></script>
     <script src="js/client.js"></script>
     <link href='http://fonts.googleapis.com/css?family=Geo|Armata' rel='stylesheet' type='text/css'></link>
-	</head>
+  </head>
 
-	<body>
-		<div id ="top">
-		  <a href = "index.html">
-			  <div id = "image"><img src = "images/noun_project_5111.png" width="49" height="63"></div>
-			  <div id="logo">
-			  Conflict Browser
-			  </div>		
-		  </a>
-	      <div id="nav">
-	        <a href="/static/browse.html"><span>Browse</span></a>
-	        <a href="/static/create.html"><span>Create</span></a>
-	      </div>
-		</div>
-		<div id = "flow">
-			Welcome to Conflict Browser
-		</div>
-		<div id = "homecontent">
-      <div id="marketing">
-        <p id="mainpoint">The world's conflicts at your fingertips</p>
-        <p id="subpoint">Easy. Insightful. Fun. </p>
-      </div>
-      <div id="main_actions">
-        <a href="/static/browse.html"><div class="button view_lib">Browse Libraries</div></a>
-        <p>or</p>
-        <a href="/static/create.html"><div class="button view_lib">Create Library</div></a>
-      </div>
+  <body>
+    <div id ="top">
+      <a href = "index.html">
+        <div id = "image"><img src = "images/noun_project_5111.png" width="49" height="63"></div>
+        <div id="logo">
+        Conflict Browser
+        </div>    
+      </a>
+        <div id="nav">
+          <a href="/static/browse.html"><span>Browse</span></a>
+          <a href="/static/create.html"><span>Create</span></a>
+        </div>
     </div>
-	</body>
+    <div id = "flow">
+      Welcome to Conflict Browser
+    </div>
+    <div id = "content">
+        <div class="instruction">
+            
+            <p>
+            Conflict Browser is an analysis project for visualizing and colllecting 
+                    information from the Militarized Interstated Dispute
+                    <a target="_blank" href="http://www.correlatesofwar.org/COW2%20Data/MIDs/MID310.html">
+                    dataset.</a>
+                    </p>
+                    <br/>
+                    <p>
+                    To begin, you can either <b>browse existing libraries</b>, or choose to <b>create your own</b>.
+                  </p>
+                  <br/>
+          <div style="text-align: center">
+            <a href="/static/browse.html"><button class="button" id="browse">Browse Libraries</button></a>
+            or
+            <a href="/static/create.html"><button class="button" id="create">Create New Library</button></a>
+          </div>
+        </div>
+    </div>
+  </body>
 </html>
