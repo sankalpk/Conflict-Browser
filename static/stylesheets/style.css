@@ -516,24 +516,33 @@ h6{
   color:white;
   font-family:"Armata",sans-serif;
   padding:20px;
-
-
+  cursor: pointer;
 }
 
+.name:hover{
+  background-color:#8a3234;
+}
 .date_modified{
   position:absolute;
   right:0px;
-  top:0px;
-  padding:20px;
+  top:15px;
+  padding:0px;
+  margin-right:15px;
   opacity: .6;
   color:white;
   font-family:"Geo",sans-serif;
+  font-size:20px;
+
+}
+
+.date_modified div{
+  font-size:13px;
 }
 
 .extra_info{
   display: none;
   padding-top:15px;
-  height:200px;
+  height:220px;
   text-align:center;
   background-color:white;
 
@@ -549,9 +558,13 @@ h6{
   position:absolute;
   text-align:left;
   width:33%;
-  height:200px; 
+  height:220px; 
   overflow-y:auto;
   z-index:3;
+}
+
+.description h1,.dates h1{
+  margin-bottom:10px;
 }
 
 

@@ -15,6 +15,7 @@ function hideExtraInfo(){
         $(lib).find(".extra_info").css("display","none");
       }
     });
+
   });
 }
 
@@ -43,7 +44,7 @@ function createLibraryView(key){
   var library=libraries[key];
   var ul=$("<ul>");
   var name=$("<li>").addClass("name").html(key);
-  var date_modified=$("<li>").addClass("date_modified").html(library.date_modified.slice(5,10)+"-"+library.date_modified.slice(0,4));
+  var date_modified=$("<li>").addClass("date_modified").html("<div>Created</div>"+library.date_modified.slice(5,10)+"-"+library.date_modified.slice(0,4));
   var extra_info=$("<div>").addClass("extra_info");
   var description=$("<li>").addClass("description").html("<h1>Description</h1><p>"+library.description+"</p>");
   var dates=$("<div>").addClass("dates");
