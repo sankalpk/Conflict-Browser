@@ -1,10 +1,10 @@
-UnitProject
+Conflict Browser
 ===========
 
-Members
+Contributors
 -------
-Devendra Gurjar (dgurjar@andrew)
-Sankalp Kulshreshtha (skulshre@andrew)
+Devendra Gurjar
+Sankalp Kulshreshtha
 
 Brief Description
 -----------------
